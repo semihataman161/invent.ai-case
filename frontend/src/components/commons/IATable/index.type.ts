@@ -6,8 +6,8 @@ export type IATableProps = {
     headerName?: string;
     sortable?: boolean;
     valueGetter?: (value: any, row: any) => any;
+    width: number;
   }[];
-  isAggregationAllowed?: boolean;
   onSelect?: (id: number) => void;
   onUpdate?: (data: any) => void;
   onDelete?: (id: number) => void;

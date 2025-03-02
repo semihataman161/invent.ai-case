@@ -3,8 +3,18 @@ import { IACardProps } from "./index.type";
 
 const IACard = ({ children, ...props }: IACardProps) => {
   return (
-    <Card sx={{ minWidth: 275 }} {...props}>
-      <CardContent>{children}</CardContent>
+    <Card {...props}>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        {children}
+      </CardContent>
     </Card>
   );
 };

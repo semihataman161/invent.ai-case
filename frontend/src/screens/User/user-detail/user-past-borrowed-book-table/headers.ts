@@ -1,4 +1,4 @@
 export const headers = [
-  { field: "name", headerName: "Name" },
-  { field: "userScore", headerName: "User Score" },
+  { field: "name", headerName: "Name", width: 200 },
+  { field: "userScore", headerName: "User Score", width: 100 },
 ];

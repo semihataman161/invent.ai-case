@@ -171,7 +171,17 @@ export const IAAppBar = ({
           ))}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          height: "calc(100vh - 64px)",
+        }}
+      >
         <DrawerHeader />
         {children}
       </Box>

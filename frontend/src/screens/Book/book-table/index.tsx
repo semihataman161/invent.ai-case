@@ -21,18 +21,8 @@ const BookTable = () => {
     navigate(id.toString());
   };
 
-  const handleUpdate = (data: (typeof stoBook.data)[0]) => {};
-
-  const handleDelete = (id: number) => {};
-
   return (
-    <IATable
-      rows={stoBook.data}
-      headers={headers}
-      onSelect={handleSelect}
-      onUpdate={handleUpdate}
-      onDelete={handleDelete}
-    />
+    <IATable rows={stoBook.data} headers={headers} onSelect={handleSelect} />
   );
 };
 

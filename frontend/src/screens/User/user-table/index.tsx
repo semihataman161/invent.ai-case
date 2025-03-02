@@ -21,18 +21,8 @@ const UserTable = () => {
     navigate(id.toString());
   };
 
-  const handleUpdate = (data: (typeof stoUser.data)[0]) => {};
-
-  const handleDelete = (id: number) => {};
-
   return (
-    <IATable
-      rows={stoUser.data}
-      headers={headers}
-      onSelect={handleSelect}
-      onDelete={handleDelete}
-      onUpdate={handleUpdate}
-    />
+    <IATable rows={stoUser.data} headers={headers} onSelect={handleSelect} />
   );
 };
 

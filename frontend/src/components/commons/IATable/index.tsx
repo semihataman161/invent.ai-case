@@ -3,7 +3,6 @@ import {
   DataGrid,
   GridColDef,
   GridCellParams,
-  gridClasses,
   GridActionsCellItem,
 } from "@mui/x-data-grid";
 import { styled } from "@mui/material/styles";
@@ -35,31 +34,25 @@ const IATable = ({
   rows,
   headers,
   loading = false,
-  isAggregationAllowed = false,
-  disableColumnFilter = true,
   onSelect,
   onUpdate,
   onDelete,
   ...props
 }: IATableProps) => {
   const columns: GridColDef[] = [
-    ...headers.map(({ field, headerName, sortable = true, valueGetter }) => ({
-      field,
-      headerName: headerName ?? field.charAt(0).toUpperCase() + field.slice(1),
-      sortable,
-      width: 150,
-      valueGetter: (value: any, row: any) => {
-        if (
-          isAggregationAllowed &&
-          row.id === rows[rows.length - 1]?.id &&
-          value !== "" &&
-          value !== undefined
-        ) {
-          return `Toplam: ${valueGetter ? valueGetter(value, row) : value}`;
-        }
-        return valueGetter ? valueGetter(value, row) : value;
-      },
-    })),
+    ...headers.map(
+      ({ field, headerName, sortable = true, valueGetter, width }) => ({
+        field,
+        headerName:
+          headerName ?? field.charAt(0).toUpperCase() + field.slice(1),
+        sortable,
+        width,
+        valueGetter: (value: any, row: any) => {
+          return valueGetter ? valueGetter(value, row) : value;
+        },
+        flex: 1,
+      })
+    ),
     ...(onSelect || onUpdate || onDelete
       ? [
           {
@@ -100,24 +93,12 @@ const IATable = ({
       : []),
   ];
 
-  const getRowClassName = (params: GridCellParams<any, any, number>) => {
-    if (!isAggregationAllowed) return "";
-
-    const lastRowIndex = rows.length - 1;
-    return params.row.id === rows[lastRowIndex].id ? "last-row" : "";
-  };
-
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        [`.${gridClasses.cell}.last-row`]: {
-          backgroundColor: "#e0f7fa",
-          color: "#0277bd",
-          border: 1,
-          borderColor: "#b3e5fc",
-        },
+        width: "70%",
       }}
     >
       <DataGrid
@@ -134,8 +115,6 @@ const IATable = ({
         pageSizeOptions={[15, 50, 100]}
         disableRowSelectionOnClick
         loading={loading}
-        disableColumnFilter={disableColumnFilter}
-        getCellClassName={getRowClassName}
         {...props}
       />
     </Box>
