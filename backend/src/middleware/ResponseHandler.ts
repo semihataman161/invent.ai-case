@@ -7,7 +7,7 @@ const ResponseHandler = (fn: RequestHandler) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = await fn(req, res, next);
-      res.status(200).json({ data });
+      res.status(200).json(data);
     } catch (error) {
       ErrorHandler(error as CustomError, req, res, next);
     }
