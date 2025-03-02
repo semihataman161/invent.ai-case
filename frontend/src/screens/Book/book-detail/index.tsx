@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@store";
+import { PairNs, UserNs } from "@store/types";
+import { DetailCard, DetailCardProps } from "@components/specifics";
 import { BookDetailScreenProps } from "./index.type";
-import { DetailCard } from "@components/specifics";
 
 const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
   const { stoBook, stoUser } = useStore();
 
   const [detailData, setDetailData] = useState([]);
+  const [userOptions, setUserOptions] = useState<PairNs.LabelValue[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const getBook = async () => {
     const data = await stoBook.getOne(id);
@@ -35,19 +38,50 @@ const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
   };
 
   const getUsers = async () => {
-    if (stoUser.loaded) {
-      return;
+    let data: UserNs.BaseResponse[] = [];
+
+    if (stoUser.loaded && stoUser.data.length > 0) {
+      data = stoUser.data;
+    } else {
+      const response = await stoUser.getAll();
+      data = response?.data || [];
     }
-    await stoUser.getAll();
+
+    const _userOptions: PairNs.LabelValue[] = data.map((element) => ({
+      label: element.name,
+      value: element.id.toString(),
+    }));
+
+    setUserOptions(_userOptions);
   };
 
   useEffect(() => {
-    getBook();
-    getUsers();
+    const fetchData = async () => {
+      await getBook();
+      await getUsers();
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
 
+  const handleBorrow: DetailCardProps["onBorrow"] = async (userId) => {
+    await stoUser.borrow(userId, id);
+    await getBook();
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <DetailCard title={"Book Details"} data={detailData} direction="column" />
+    <DetailCard
+      title={"Book Details"}
+      data={detailData}
+      direction="column"
+      options={userOptions}
+      onBorrow={handleBorrow}
+    />
   );
 };
 
