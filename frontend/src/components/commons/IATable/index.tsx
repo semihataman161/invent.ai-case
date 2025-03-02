@@ -7,7 +7,7 @@ import {
   GridActionsCellItem,
 } from "@mui/x-data-grid";
 import { styled } from "@mui/material/styles";
-import { Edit, Delete } from "@mui/icons-material";
+import { Edit, Delete, Visibility } from "@mui/icons-material";
 import { IATableProps } from "./index.type";
 
 const StyledGridOverlay = styled("div")(({ theme }) => ({
@@ -37,15 +37,16 @@ const IATable = ({
   loading = false,
   isAggregationAllowed = false,
   disableColumnFilter = true,
-  onDelete,
+  onSelect,
   onUpdate,
+  onDelete,
   ...props
 }: IATableProps) => {
   const columns: GridColDef[] = [
     ...headers.map(({ field, headerName, sortable = true, valueGetter }) => ({
       field,
       headerName: headerName ?? field.charAt(0).toUpperCase() + field.slice(1),
-      sortable: sortable,
+      sortable,
       width: 150,
       valueGetter: (value: any, row: any) => {
         if (
@@ -59,7 +60,7 @@ const IATable = ({
         return valueGetter ? valueGetter(value, row) : value;
       },
     })),
-    ...(onUpdate || onDelete
+    ...(onSelect || onUpdate || onDelete
       ? [
           {
             field: "actions",
@@ -68,6 +69,14 @@ const IATable = ({
             width: 150,
             renderCell: (params: GridCellParams) => (
               <Box sx={{ display: "flex", gap: 1 }}>
+                {onSelect && (
+                  <GridActionsCellItem
+                    icon={<Visibility />}
+                    label="Select"
+                    onClick={() => onSelect(params.row.id)}
+                    color="success"
+                  />
+                )}
                 {onUpdate && (
                   <GridActionsCellItem
                     icon={<Edit />}

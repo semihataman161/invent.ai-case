@@ -5,12 +5,13 @@ import { UserNs } from "@store/types";
 
 class UserStore {
   data: UserNs.Response[] = [];
+  selected: Partial<UserNs.Response> = {};
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  async getUsers(config?: HttpRequestConfig) {
+  async getAll(config?: HttpRequestConfig) {
     const [err, data] = await UserApi.getUsers(config);
 
     if (!err) {
@@ -22,21 +23,24 @@ class UserStore {
     return { data };
   }
 
-  async getUser(user_id: string) {
+  async getOne(user_id: string) {
     const [err, data] = await UserApi.getUser(user_id);
+
+    if (!err) {
+      runInAction(() => {
+        this.selected = data;
+      });
+    }
+
     return data;
   }
 
-  async borrowBook(userId: string | number, bookId: string | number) {
+  async borrow(userId: string, bookId: string) {
     const [err, data] = await UserApi.borrowBook(userId, bookId);
     return data;
   }
 
-  async returnBook(
-    userId: string | number,
-    bookId: string | number,
-    body: UserNs.Request
-  ) {
+  async return(userId: string, bookId: string, body: UserNs.Request) {
     const [err, data] = await UserApi.returnBook(userId, bookId, body);
     return data;
   }

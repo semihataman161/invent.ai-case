@@ -1,5 +1,5 @@
-import { Container, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Container, Typography, Button, Box } from "@mui/material";
 
 const NotFound = () => {
   const navigate = useNavigate();

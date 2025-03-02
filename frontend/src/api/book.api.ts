@@ -8,7 +8,7 @@ class BookApi {
     return http.get<any[]>(this.apiUrl, config).toPromiseArrayApi();
   }
 
-  getBook(id: string | number, config?: HttpRequestConfig) {
+  getBook(id: string, config?: HttpRequestConfig) {
     return http.get<any>(`${this.apiUrl}/${id}`, config).toPromiseArrayApi();
   }
 }

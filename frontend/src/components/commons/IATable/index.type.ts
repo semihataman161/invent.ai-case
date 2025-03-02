@@ -8,6 +8,7 @@ export type IATableProps = {
     valueGetter?: (value: any, row: any) => any;
   }[];
   isAggregationAllowed?: boolean;
-  onDelete?: (id: number) => void;
+  onSelect?: (id: number) => void;
   onUpdate?: (data: any) => void;
-} & DataGridProps;
+  onDelete?: (id: number) => void;
+} & Omit<DataGridProps, "columns">;

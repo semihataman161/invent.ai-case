@@ -5,12 +5,13 @@ import { BookNs } from "@store/types";
 
 class BookStore {
   data: BookNs.Response[] = [];
+  selected: Partial<BookNs.Response> = {};
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  async getBooks(config?: HttpRequestConfig) {
+  async getAll(config?: HttpRequestConfig) {
     const [err, data] = await BookApi.getBooks(config);
 
     if (!err) {
@@ -22,8 +23,15 @@ class BookStore {
     return { data };
   }
 
-  async getBook(book_id: string) {
+  async getOne(book_id: string) {
     const [err, data] = await BookApi.getBook(book_id);
+
+    if (!err) {
+      runInAction(() => {
+        this.selected = data;
+      });
+    }
+
     return data;
   }
 }

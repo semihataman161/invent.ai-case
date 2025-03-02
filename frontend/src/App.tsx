@@ -5,6 +5,8 @@ import { Stores, StoreWrap } from "@store";
 import { Footer, Menu } from "@components/specifics";
 import AppRoutes from "./routes";
 
+import "@core/extensions/promise";
+
 function App() {
   return (
     <StoreWrap store={{ ...Stores }}>
