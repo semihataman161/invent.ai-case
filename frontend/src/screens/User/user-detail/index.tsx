@@ -36,13 +36,13 @@ const UserDetailScreen = ({ id }: UserDetailScreenProps) => {
 
   return (
     <Box display="flex" flexDirection="column" gap={4}>
-      <IACard>
+      <IACard sx={{ width: "50%" }}>
         <Typography variant="h5" component="div" mb={2}>
           Currently Borrowed Books
         </Typography>
         <UserPresentBorrowedBookTable data={presentBooks} />
       </IACard>
-      <IACard>
+      <IACard sx={{ width: "50%" }}>
         <Typography variant="h5" component="div" mb={2}>
           Previously Borrowed Books
         </Typography>

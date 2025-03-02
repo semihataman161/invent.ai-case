@@ -4,15 +4,15 @@ import { DetailCardProps } from "./index.type";
 
 const DetailCard = ({ title, data, direction }: DetailCardProps) => {
   return (
-    <IACard>
+    <IACard alignItems={"flex-start"} sx={{ width: "30%" }}>
       <Typography variant="h5" component="div">
         {title}
       </Typography>
       <Grid2 container spacing={2} sx={{ mt: 2 }} direction={direction}>
-        {Object.entries(data).map(([key, value]) => (
+        {data.map(({ key, displayName, value }) => (
           <Grid2 key={key} component="div">
             <Typography variant="body1" component="div" fontWeight="bold">
-              {key}:
+              {displayName}:
             </Typography>
             <Typography variant="body2">{String(value)}</Typography>
           </Grid2>

@@ -4,7 +4,7 @@ import { IACard } from "@components/commons";
 
 const UserScreen = () => {
   return (
-    <IACard>
+    <IACard sx={{ width: "50%" }}>
       <Typography variant="h5" component="div" mb={2}>
         User Table
       </Typography>

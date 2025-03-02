@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@store";
 import { BookDetailScreenProps } from "./index.type";
@@ -7,8 +7,31 @@ import { DetailCard } from "@components/specifics";
 const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
   const { stoBook } = useStore();
 
+  const [detailData, setDetailData] = useState([]);
+
   const getBook = async () => {
-    await stoBook.getOne(id);
+    const data = await stoBook.getOne(id);
+
+    const modifiedData = Object.entries(data).reduce((acc, [key, value]) => {
+      const displayName = getDisplayNameForKey(key);
+      acc.push({ key, displayName, value: value || "-" });
+      return acc;
+    }, []);
+
+    setDetailData(modifiedData);
+  };
+
+  const getDisplayNameForKey = (key: string) => {
+    const names = {
+      id: "Id",
+      name: "Name",
+      author: "Author",
+      year: "Year",
+      currentBorrower: "Current Owner",
+      score: "Average Rating",
+    };
+
+    return names[key] || key;
   };
 
   useEffect(() => {
@@ -16,11 +39,7 @@ const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
   }, []);
 
   return (
-    <DetailCard
-      title={"Book Details"}
-      data={stoBook.selected}
-      direction="column"
-    />
+    <DetailCard title={"Book Details"} data={detailData} direction="column" />
   );
 };
 

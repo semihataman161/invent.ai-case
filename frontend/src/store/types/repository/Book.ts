@@ -4,5 +4,10 @@ export namespace BookNs {
     name: string;
   };
 
-  export type ExtendedResponse = {} & BaseResponse;
+  export type ExtendedResponse = {
+    author: string;
+    currentBorrower: string;
+    score: number | null;
+    year: number;
+  } & BaseResponse;
 }

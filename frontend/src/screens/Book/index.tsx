@@ -4,7 +4,7 @@ import BookTable from "@screens/Book/book-table";
 
 const BookScreen = () => {
   return (
-    <IACard>
+    <IACard sx={{ width: "50%" }}>
       <Typography variant="h5" component="div" mb={2}>
         Book Table
       </Typography>

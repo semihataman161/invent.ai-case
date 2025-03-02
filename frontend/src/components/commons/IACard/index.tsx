@@ -1,16 +1,26 @@
 import { Card, CardContent } from "@mui/material";
 import { IACardProps } from "./index.type";
 
-const IACard = ({ children, ...props }: IACardProps) => {
+const IACard = ({
+  children,
+  sx,
+  alignItems = "center",
+  ...props
+}: IACardProps) => {
   return (
-    <Card {...props}>
+    <Card
+      {...props}
+      sx={{
+        margin: "auto",
+        ...sx,
+      }}
+    >
       <CardContent
         sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
+          alignItems,
         }}
       >
         {children}
