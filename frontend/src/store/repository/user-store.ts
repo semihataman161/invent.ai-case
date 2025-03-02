@@ -7,6 +7,8 @@ class UserStore {
   data: UserNs.BaseResponse[] = [];
   selected: Partial<UserNs.ExtendedResponse> = {};
 
+  loaded = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -17,6 +19,7 @@ class UserStore {
     if (!err) {
       runInAction(() => {
         this.data = data;
+        this.loaded = true;
       });
     }
 

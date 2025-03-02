@@ -9,11 +9,13 @@ export namespace UserNs {
   };
 
   export type PastBook = {
+    id: number;
     name: string;
     userScore: number;
   };
 
   export type PresentBook = {
+    id: number;
     name: string;
   };
 

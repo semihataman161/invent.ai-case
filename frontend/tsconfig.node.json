@@ -25,6 +25,7 @@
       "@api": ["src/api"],
       "@components/*": ["src/components/*"],
       "@core/*": ["src/core/*"],
+      "@helpers/*": ["src/helpers/*"],
       "@pages/*": ["src/pages/*"],
       "@pages": ["src/pages"],
       "@screens/*": ["src/screens/*"],

@@ -15,7 +15,11 @@ export const borrowBook = async (req: Request, res: Response): Promise<any> => {
 };
 
 export const returnBook = async (req: Request, res: Response): Promise<any> => {
-  await UserService.returnBook(req.params.userId, req.params.bookId);
+  await UserService.returnBook(
+    req.params.userId,
+    req.params.bookId,
+    req.body.score
+  );
   return { message: "Book returned successfully" };
 };
 

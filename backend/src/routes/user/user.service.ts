@@ -26,6 +26,7 @@ export const getUserById = async (id: string) => {
   const pastBooks = borrowings
     .filter((borrowing: any) => borrowing.returnedAt !== null)
     .map((borrowing: any) => ({
+      id: borrowing.book.id,
       name: borrowing.book.name,
       userScore:
         ratings.find((rating: any) => rating.bookId === borrowing.bookId)
@@ -35,6 +36,7 @@ export const getUserById = async (id: string) => {
   const presentBooks = borrowings
     .filter((borrowing: any) => borrowing.returnedAt === null)
     .map((borrowing: any) => ({
+      id: borrowing.book.id,
       name: borrowing.book.name,
     }));
 
@@ -71,7 +73,12 @@ export const borrowBook = async (userId: string, bookId: string) => {
   });
 };
 
-export const returnBook = async (userId: string, bookId: string) => {
+export const returnBook = async (
+  userId: string,
+  bookId: string,
+  score: number
+) => {
+  console.log(userId, bookId, score);
   const borrowing = await prisma.borrowing.findFirst({
     where: {
       userId: Number(userId),
@@ -89,6 +96,24 @@ export const returnBook = async (userId: string, bookId: string) => {
     where: { id: borrowing.id },
     data: { returnedAt: new Date() },
   });
+
+  const existingRating = await prisma.rating.findFirst({
+    where: {
+      userId: Number(userId),
+      bookId: Number(bookId),
+    },
+  });
+
+  console.log("exc: ", existingRating);
+  if (!existingRating) {
+    await prisma.rating.create({
+      data: {
+        userId: Number(userId),
+        bookId: Number(bookId),
+        score,
+      },
+    });
+  }
 };
 
 export const UserService = {

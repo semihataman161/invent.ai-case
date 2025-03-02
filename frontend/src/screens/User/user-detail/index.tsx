@@ -3,10 +3,13 @@ import { observer } from "mobx-react-lite";
 import { Box, Typography } from "@mui/material";
 import { useStore } from "@store";
 import { UserNs } from "@store/types";
-import { UserDetailScreenProps } from "./index.type";
+import { bookRetunModalRef } from "@helpers/References";
 import { IACard } from "@components/commons";
+import BookReturnModal from "./book-return-modal";
 import UserPresentBorrowedBookTable from "./user-present-borrowed-book-table";
 import UserPastBorrowedBookTable from "./user-past-borrowed-book-table";
+import { UserDetailScreenProps } from "./index.type";
+import { BookReturnModalNs } from "./book-return-modal/index.type";
 
 const UserDetailScreen = ({ id }: UserDetailScreenProps) => {
   const { stoUser } = useStore();
@@ -17,22 +20,21 @@ const UserDetailScreen = ({ id }: UserDetailScreenProps) => {
   const getUser = async () => {
     const data = await stoUser.getOne(id);
 
-    const _presentBooks = data.books.present.map((element, index) => ({
-      ...element,
-      id: index,
-    }));
-    setPresentBooks(_presentBooks);
-
-    const _pastBooks = data.books.past.map((element, index) => ({
-      ...element,
-      id: index,
-    }));
-    setPastBooks(_pastBooks);
+    setPresentBooks(data.books.present);
+    setPastBooks(data.books.past);
   };
 
   useEffect(() => {
     getUser();
   }, []);
+
+  const handleReturn: BookReturnModalNs.Props["onSubmit"] = async (
+    bookId,
+    score
+  ) => {
+    await stoUser.return(id, bookId.toString(), { score: +score });
+    await getUser();
+  };
 
   return (
     <Box display="flex" flexDirection="column" gap={4}>
@@ -41,6 +43,7 @@ const UserDetailScreen = ({ id }: UserDetailScreenProps) => {
           Currently Borrowed Books
         </Typography>
         <UserPresentBorrowedBookTable data={presentBooks} />
+        <BookReturnModal ref={bookRetunModalRef} onSubmit={handleReturn} />
       </IACard>
       <IACard sx={{ width: "50%" }}>
         <Typography variant="h5" component="div" mb={2}>

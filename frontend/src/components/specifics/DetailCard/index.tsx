@@ -1,5 +1,5 @@
-import IACard from "@components/commons/IACard";
 import { Typography, Grid2 } from "@mui/material";
+import IACard from "@components/commons/IACard";
 import { DetailCardProps } from "./index.type";
 
 const DetailCard = ({ title, data, direction }: DetailCardProps) => {

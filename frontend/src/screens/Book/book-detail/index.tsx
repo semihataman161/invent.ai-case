@@ -5,7 +5,7 @@ import { BookDetailScreenProps } from "./index.type";
 import { DetailCard } from "@components/specifics";
 
 const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
-  const { stoBook } = useStore();
+  const { stoBook, stoUser } = useStore();
 
   const [detailData, setDetailData] = useState([]);
 
@@ -34,8 +34,16 @@ const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
     return names[key] || key;
   };
 
+  const getUsers = async () => {
+    if (stoUser.loaded) {
+      return;
+    }
+    await stoUser.getAll();
+  };
+
   useEffect(() => {
     getBook();
+    getUsers();
   }, []);
 
   return (
