@@ -13,14 +13,14 @@ async function main() {
 
   const book1 = await prisma.book.create({
     data: {
-      title: "The Pragmatic Programmer",
+      name: "The Pragmatic Programmer",
       author: "Andrew Hunt",
       year: 1999,
     },
   });
 
   const book2 = await prisma.book.create({
-    data: { title: "Clean Code", author: "Robert C. Martin", year: 2008 },
+    data: { name: "Clean Code", author: "Robert C. Martin", year: 2008 },
   });
 
   await prisma.borrowing.createMany({

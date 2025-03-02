@@ -26,7 +26,7 @@ export const getUserById = async (id: string) => {
   const pastBooks = borrowings
     .filter((borrowing: any) => borrowing.returnedAt !== null)
     .map((borrowing: any) => ({
-      name: borrowing.book.title,
+      name: borrowing.book.name,
       userScore:
         ratings.find((rating: any) => rating.bookId === borrowing.bookId)
           ?.score ?? null,
@@ -35,7 +35,7 @@ export const getUserById = async (id: string) => {
   const presentBooks = borrowings
     .filter((borrowing: any) => borrowing.returnedAt === null)
     .map((borrowing: any) => ({
-      name: borrowing.book.title,
+      name: borrowing.book.name,
     }));
 
   return {
