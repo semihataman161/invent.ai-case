@@ -30,6 +30,3 @@ logs/**/*.log
 # OS-specific  
 .DS_Store  
 Thumbs.db  
-
-# Runtime data
-*.seed
