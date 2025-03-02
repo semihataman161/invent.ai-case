@@ -78,7 +78,6 @@ export const returnBook = async (
   bookId: string,
   score: number
 ) => {
-  console.log(userId, bookId, score);
   const borrowing = await prisma.borrowing.findFirst({
     where: {
       userId: Number(userId),
@@ -104,7 +103,6 @@ export const returnBook = async (
     },
   });
 
-  console.log("exc: ", existingRating);
   if (!existingRating) {
     await prisma.rating.create({
       data: {
