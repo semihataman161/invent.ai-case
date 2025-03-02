@@ -15,7 +15,13 @@ const BookDetailCard = ({ id }: BookDetailCardProps) => {
     getBook();
   }, []);
 
-  return <DetailCard title={"Book Details"} data={stoBook.selected} />;
+  return (
+    <DetailCard
+      title={"Book Details"}
+      data={stoBook.selected}
+      direction="column"
+    />
+  );
 };
 
 export default observer(BookDetailCard);

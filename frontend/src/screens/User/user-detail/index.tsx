@@ -15,7 +15,13 @@ const UserDetailCard = ({ id }: UserDetailCardProps) => {
     getUser();
   }, []);
 
-  return <DetailCard title={"User Details"} data={stoUser.selected} />;
+  return (
+    <DetailCard
+      title={"User Details"}
+      data={stoUser.selected}
+      direction="column"
+    />
+  );
 };
 
 export default observer(UserDetailCard);

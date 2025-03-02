@@ -2,13 +2,13 @@ import IACard from "@components/commons/IACard";
 import { Typography, Grid2 } from "@mui/material";
 import { DetailCardProps } from "./index.type";
 
-const DetailCard = ({ title, data }: DetailCardProps) => {
+const DetailCard = ({ title, data, direction }: DetailCardProps) => {
   return (
     <IACard>
       <Typography variant="h5" component="div">
         {title}
       </Typography>
-      <Grid2 container spacing={2} sx={{ mt: 2 }}>
+      <Grid2 container spacing={2} sx={{ mt: 2 }} direction={direction}>
         {Object.entries(data).map(([key, value]) => (
           <Grid2 key={key} component="div">
             <Typography variant="body1" component="div" fontWeight="bold">
