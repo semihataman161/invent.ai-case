@@ -8,18 +8,31 @@ export const getAllBooks = async () => {
 export const getBookById = async (id: string) => {
   const book = await prisma.book.findUnique({
     where: { id: Number(id) },
-    include: { borrower: true, ratings: true },
   });
 
   if (!book) throw new CustomError("Book not found", { statusCode: 404 });
 
-  const avgRating =
-    book.ratings.length > 0
-      ? book.ratings.reduce((sum: any, r: any) => sum + r.score, 0) /
-        book.ratings.length
-      : null;
+  const activeBorrowing = await prisma.borrowing.findFirst({
+    where: { bookId: book.id, returnedAt: null },
+    include: { user: true },
+  });
 
-  return { ...book, avgRating };
+  const currentBorrower = activeBorrowing ? activeBorrowing.user.name : null;
+
+  const avgRating = await prisma.rating.aggregate({
+    _avg: {
+      score: true,
+    },
+    where: {
+      bookId: book.id,
+    },
+  });
+
+  return {
+    ...book,
+    score: avgRating._avg.score ?? null,
+    currentBorrower,
+  };
 };
 
 export const BookService = {
