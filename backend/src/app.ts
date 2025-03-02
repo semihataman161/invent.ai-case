@@ -1,13 +1,11 @@
 import express from "express";
-import userRoutes from "./routes/user/user.route";
-import bookRoutes from "./routes/book/book.route";
-import { errorResponder } from "./middleware/errorMiddleware";
+import UserRoutes from "./routes/user/user.route";
+import BookRoutes from "./routes/book/book.route";
 
 const app = express();
 
 app.use(express.json());
-app.use(userRoutes);
-app.use(bookRoutes);
-app.use(errorResponder);
+app.use(UserRoutes);
+app.use(BookRoutes);
 
 export default app;

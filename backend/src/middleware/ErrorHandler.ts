@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express";
+import { CustomError } from "../core/errors/CustomError";
 
 const INTERNAL_SERVER_ERROR = 500;
 
-const errorResponder = (
-  error: any,
+const ErrorHandler = (
+  error: CustomError,
   req: Request,
   res: Response,
   next: NextFunction
@@ -15,7 +16,8 @@ const errorResponder = (
     status = options.statusCode;
   }
 
-  res.status(status).json({ data: req.body, message });
+  res.status(status).json({ data: {}, message });
+  next(error);
 };
 
-export { errorResponder };
+export { ErrorHandler };

@@ -1,3 +1,4 @@
+import { CustomError } from "../../core/errors/CustomError";
 import prisma from "../../models/prismaClient";
 
 export const getAllBooks = async () => {
@@ -10,7 +11,7 @@ export const getBookById = async (id: string) => {
     include: { borrower: true, ratings: true },
   });
 
-  if (!book) throw new Error("Book not available");
+  if (!book) throw new CustomError("Book not found", { statusCode: 404 });
 
   const avgRating =
     book.ratings.length > 0

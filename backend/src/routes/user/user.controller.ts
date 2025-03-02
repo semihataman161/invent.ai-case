@@ -1,27 +1,23 @@
 import { Request, Response } from "express";
-import asyncHandler from "express-async-handler";
 import { UserService } from "./user.service";
 
-export const getUsers = asyncHandler(async (req: Request, res: Response) => {
-  const users = await UserService.getAllUsers();
-  res.status(200).json(users);
-});
+export const getUsers = async (req: Request, res: Response): Promise<any> => {
+  return await UserService.getAllUsers();
+};
 
-export const getUser = asyncHandler(async (req: Request, res: Response) => {
-  const user = await UserService.getUserById(req.params.id);
-  if (!user) res.status(404).json({ message: "User not found" });
-  res.status(200).json(user);
-});
+export const getUser = async (req: Request, res: Response): Promise<any> => {
+  return await UserService.getUserById(req.params.id);
+};
 
-export const borrowBook = asyncHandler(async (req: Request, res: Response) => {
+export const borrowBook = async (req: Request, res: Response): Promise<any> => {
   await UserService.borrowBook(req.params.userId, req.params.bookId);
-  res.status(200).json({ message: "Book borrowed successfully" });
-});
+  return { message: "Book borrowed successfully" };
+};
 
-export const returnBook = asyncHandler(async (req: Request, res: Response) => {
+export const returnBook = async (req: Request, res: Response): Promise<any> => {
   await UserService.returnBook(req.params.userId, req.params.bookId);
-  res.status(200).json({ message: "Book returned successfully" });
-});
+  return { message: "Book returned successfully" };
+};
 
 export const UserController = {
   getUsers,
