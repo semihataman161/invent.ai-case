@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import _ from "lodash";
+import { toast } from "react-toastify";
 import { observer } from "mobx-react-lite";
 import { Box, Typography } from "@mui/material";
 import { useStore } from "@store";
@@ -32,8 +34,14 @@ const UserDetailScreen = ({ id }: UserDetailScreenProps) => {
     bookId,
     score
   ) => {
-    await stoUser.return(id, bookId.toString(), { score: +score });
+    const data = await stoUser.return(id, bookId.toString(), { score: +score });
+
+    if (_.isEmpty(data)) {
+      return;
+    }
+
     await getUser();
+    toast.success("Book returned successfully");
   };
 
   return (

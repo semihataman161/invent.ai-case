@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import _ from "lodash";
+import { toast } from "react-toastify";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@store";
 import { PairNs, UserNs } from "@store/types";
@@ -66,8 +68,14 @@ const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
   }, []);
 
   const handleBorrow: DetailCardProps["onBorrow"] = async (userId) => {
-    await stoUser.borrow(userId, id);
+    const data = await stoUser.borrow(userId, id);
+
+    if (_.isEmpty(data)) {
+      return;
+    }
+
     await getBook();
+    toast.success("Book borrowed successfully");
   };
 
   if (loading) {

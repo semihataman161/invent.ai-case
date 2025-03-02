@@ -108,11 +108,11 @@ const IATable = ({
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 15,
+              pageSize: 5,
             },
           },
         }}
-        pageSizeOptions={[15, 50, 100]}
+        pageSizeOptions={[5, 20, 50]}
         disableRowSelectionOnClick
         loading={loading}
         {...props}
