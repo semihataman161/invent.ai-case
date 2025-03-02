@@ -10,7 +10,7 @@ const BookTable = () => {
   const { stoBook } = useStore();
 
   const getBooks = async () => {
-    await stoBook.getAll();
+    const data = await stoBook.getAll();
   };
 
   useEffect(() => {

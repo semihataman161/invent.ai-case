@@ -1,12 +1,7 @@
-import { IACard } from "@components/commons";
-import BookTable from "@screens/Book/book-table";
+import BookScreen from "@screens/Book";
 
 const Book = () => {
-  return (
-    <IACard>
-      <BookTable />
-    </IACard>
-  );
+  return <BookScreen />;
 };
 
 export default Book;

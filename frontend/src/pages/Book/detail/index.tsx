@@ -1,10 +1,10 @@
-import BookDetailCard from "@screens/Book/book-detail";
 import { useParams } from "react-router-dom";
+import BookDetailScreen from "@screens/Book/book-detail";
 
 const BookDetail = () => {
   const { id } = useParams();
 
-  return <BookDetailCard id={id}/>;
+  return <BookDetailScreen id={id} />;
 };
 
 export default BookDetail;

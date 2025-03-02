@@ -4,8 +4,8 @@ import { UserApi } from "@api";
 import { UserNs } from "@store/types";
 
 class UserStore {
-  data: UserNs.Response[] = [];
-  selected: Partial<UserNs.Response> = {};
+  data: UserNs.BaseResponse[] = [];
+  selected: Partial<UserNs.ExtendedResponse> = {};
 
   constructor() {
     makeAutoObservable(this);

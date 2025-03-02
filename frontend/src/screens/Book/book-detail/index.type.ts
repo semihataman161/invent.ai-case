@@ -1,3 +1,3 @@
-export type BookDetailCardProps = {
+export type BookDetailScreenProps = {
   id: string;
 };

@@ -4,8 +4,8 @@ import { BookApi } from "@api";
 import { BookNs } from "@store/types";
 
 class BookStore {
-  data: BookNs.Response[] = [];
-  selected: Partial<BookNs.Response> = {};
+  data: BookNs.BaseResponse[] = [];
+  selected: Partial<BookNs.ExtendedResponse> = {};
 
   constructor() {
     makeAutoObservable(this);

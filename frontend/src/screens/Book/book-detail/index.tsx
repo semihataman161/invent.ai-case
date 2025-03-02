@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "@store";
-import { BookDetailCardProps } from "./index.type";
+import { BookDetailScreenProps } from "./index.type";
 import { DetailCard } from "@components/specifics";
 
-const BookDetailCard = ({ id }: BookDetailCardProps) => {
+const BookDetailScreen = ({ id }: BookDetailScreenProps) => {
   const { stoBook } = useStore();
 
   const getBook = async () => {
@@ -24,5 +24,5 @@ const BookDetailCard = ({ id }: BookDetailCardProps) => {
   );
 };
 
-export default observer(BookDetailCard);
-export type { BookDetailCardProps };
+export default observer(BookDetailScreen);
+export type { BookDetailScreenProps };

@@ -1,12 +1,7 @@
-import { IACard } from "@components/commons";
-import UserTable from "@screens/User/user-table";
+import UserScreen from "@screens/User";
 
 const User = () => {
-  return (
-    <IACard>
-      <UserTable />
-    </IACard>
-  );
+  return <UserScreen />;
 };
 
 export default User;

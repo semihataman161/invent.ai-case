@@ -1,10 +1,10 @@
-import UserDetailCard from "@screens/User/user-detail";
 import { useParams } from "react-router-dom";
+import UserDetailScreen from "@screens/User/user-detail";
 
 const UserDetail = () => {
   const { id } = useParams();
 
-  return <UserDetailCard id={id} />;
+  return <UserDetailScreen id={id} />;
 };
 
 export default UserDetail;

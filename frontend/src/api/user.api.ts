@@ -6,18 +6,18 @@ class UserApi {
   private apiUrl = `${apiBaseUrl}/users`;
 
   getUsers(config?: HttpRequestConfig) {
-    return http.get<UserNs.Response[]>(this.apiUrl, config).toPromiseArrayApi();
+    return http
+      .get<UserNs.BaseResponse[]>(this.apiUrl, config)
+      .toPromiseArrayApi();
   }
 
   getUser(id: string, config?: HttpRequestConfig) {
-    return http.get<any>(`${this.apiUrl}/${id}`, config).toPromiseArrayApi();
+    return http
+      .get<UserNs.ExtendedResponse>(`${this.apiUrl}/${id}`, config)
+      .toPromiseArrayApi();
   }
 
-  borrowBook(
-    userId: string,
-    bookId: string,
-    config?: HttpRequestConfig
-  ) {
+  borrowBook(userId: string, bookId: string, config?: HttpRequestConfig) {
     return http
       .post<any>(`${this.apiUrl}/${userId}/borrow/${bookId}`, {}, config)
       .toPromiseArrayApi();
