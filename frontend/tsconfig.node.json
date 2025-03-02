@@ -25,15 +25,10 @@
       "@api": ["src/api"],
       "@components/*": ["src/components/*"],
       "@core/*": ["src/core/*"],
-      "@helpers/*": ["src/helpers/*"],
       "@pages/*": ["src/pages/*"],
-      "@screens/*": ["src/screens/*"],
-      "@services/*": ["src/services/*"],
-      "@services": ["src/services"],
+      "@pages": ["src/pages"],
       "@store/*": ["src/store/*"],
-      "@store": ["src/store"],
-      "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"]
+      "@store": ["src/store"]
     }
   },
   "include": ["vite.config.ts"]

@@ -1,5 +1,4 @@
-import { Box } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Box, CircularProgress } from "@mui/material";
 import {
   DataGrid,
   GridColDef,
@@ -8,8 +7,7 @@ import {
   GridActionsCellItem,
 } from "@mui/x-data-grid";
 import { styled } from "@mui/material/styles";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Edit, Delete } from "@mui/icons-material";
 import { IATableProps } from "./index.type";
 
 const StyledGridOverlay = styled("div")(({ theme }) => ({
@@ -72,7 +70,7 @@ const IATable = ({
               <Box sx={{ display: "flex", gap: 1 }}>
                 {onUpdate && (
                   <GridActionsCellItem
-                    icon={<EditIcon />}
+                    icon={<Edit />}
                     label="Update"
                     onClick={() => onUpdate(params.row)}
                     color="primary"
@@ -80,7 +78,7 @@ const IATable = ({
                 )}
                 {onDelete && (
                   <GridActionsCellItem
-                    icon={<DeleteIcon />}
+                    icon={<Delete />}
                     label="Delete"
                     onClick={() => onDelete(params.row.id)}
                     color="error"

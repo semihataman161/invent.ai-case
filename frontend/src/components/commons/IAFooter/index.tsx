@@ -1,8 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { IAFooterProps } from "./index.type";
 
-const IAFooter = () => {
-  const currentYear = new Date().getFullYear();
-
+const IAFooter = ({ children }: IAFooterProps) => {
   return (
     <Box
       sx={{
@@ -16,9 +15,7 @@ const IAFooter = () => {
         padding: "10px",
       }}
     >
-      <Typography variant="body2">
-        © {currentYear} Invent Analytics. All rights reserved.
-      </Typography>
+      {children}
     </Box>
   );
 };

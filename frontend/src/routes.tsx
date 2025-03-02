@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "@pages/Home";
-import About from "@pages/About";
-import NotFound from "@pages/NotFound";
+import { Home, User, Book, NotFound } from "@pages";
+import { Menu } from "@components/specifics";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/users" element={<User />} />
+      <Route path="/books" element={<Book />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
