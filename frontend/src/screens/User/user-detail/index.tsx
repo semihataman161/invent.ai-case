@@ -21,7 +21,6 @@ const UserDetailScreen = ({ id }: UserDetailScreenProps) => {
 
   const getUser = async () => {
     const data = await stoUser.getOne(id);
-
     setPresentBooks(data.books.present);
     setPastBooks(data.books.past);
   };

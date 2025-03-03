@@ -8,7 +8,8 @@ const UserPresentBorrowedBookTable = ({
   data,
 }: UserPresentBorrowedBookTableProps) => {
   const handleSelect = (id: number) => {
-    bookRetunModalRef.current?.open(id);
+    const bookId = data.find((element) => element.id === id).bookId;
+    bookRetunModalRef.current?.open(bookId);
   };
 
   return <IATable rows={data} headers={headers} onSelect={handleSelect} />;
